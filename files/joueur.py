@@ -42,7 +42,7 @@ class Joueur:
 		return self.nom
 		
 	def supprimer(self):
-		"""Méthode servant à supprimer un joueur."""
+		"""Méthode servant à supprimer un joueur."""		
 		if self.connexion_commande is not None:	# On ferme d'abord les connexions liées au joueur
 			self.connexion_commande.close()		
 		if self.connexion_affichage is not None:		
@@ -64,8 +64,8 @@ class Joueur:
 					elt.envoyer_message("Probleme de connecxon au client d'affichage du joueur {}.".format(self.numero))
 			# Puis on efface le joueur
 			self.supprimer()
-		#excelpt OSError:
 			
+		
 	def victoire(self, labyrinthe):
 		""" Fonction vérifiant si l'on a atteint la sortie """
 		return self.robot == labyrinthe.sortie		

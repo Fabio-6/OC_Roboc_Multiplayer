@@ -59,5 +59,7 @@ def analyse_commande(commande):
 
 
 
-
-
+def envoyer_message_a_tous(message, liste_des_joueurs):
+	"""Envoye un message à tous les joueurs et vérifie qu'il n'y a pas d'erreur."""
+	for joueur in liste_des_joueurs:
+		joueur.envoyer_message(message)
