@@ -126,9 +126,7 @@ while serveur_lance and not fin_de_partie:
 			except ConnectionResetError:
 				msg = "Le joueur {}, {} s'est déconnecté.".format(joueur.numero, joueur.nom)	# Affichage d'un message d'alerte
 				print(msg)
-				envoyer_message_a_tous(msg, Joueur.liste)									# Envoi du message aux autres joueurs
-				#for joueur_a_contacter in Joueur.liste:											
-				#	joueur_a_contacter.envoyer_message(msg)										
+				envoyer_message_a_tous(msg, Joueur.liste)									# Envoi du message aux autres joueurs										
 				joueur.supprimer()											# Fermeture des connexions et suppression de l'objet Joueur
 			
 			# Sinon, on traite le message reçu
@@ -161,8 +159,6 @@ while serveur_lance and not fin_de_partie:
 							msg = "\nJoueur {} enregistre.".format(joueur.numero)
 							print(msg)					
 							envoyer_message_a_tous(msg, Joueur.liste)
-							#for joueur_a_contacter in Joueur.liste:
-							#	joueur_a_contacter.envoyer_message(msg)
 							joueur.etape_connexion += 1
 							
 							# Et on affiche la liste des joueurs prêts	
@@ -170,16 +166,7 @@ while serveur_lance and not fin_de_partie:
 							for joueur_present in Joueur.liste:
 								if joueur_present.etape_connexion >= 2:
 									msg = "	 - '{}' : {} (Joueur {})".format(joueur_present.representation, joueur_present.nom, joueur_present.numero)	
-									envoyer_message_a_tous(msg, Joueur.liste)
-									
-							#envoyer_message_a_tous(msg, Joueur.liste)
-							#for joueur_a_contacter in Joueur.liste:
-							#	joueur_a_contacter.envoyer_message("Joueurs prets :")
-							#	for joueur_present in Joueur.liste:
-							#		if joueur_present.etape_connexion >= 2:
-							#			msg = "	 - '{}' : {} (Joueur {})".format(joueur_present.representation, joueur_present.nom, joueur_present.numero)									
-							#			joueur_a_contacter.envoyer_message(msg)						
-							
+									envoyer_message_a_tous(msg, Joueur.liste)							
 					
 					# Attente du début de partie
 					elif joueur.etape_connexion == 2:	# etape_connexion == 2 : joueur prêt, sans position de départ attribuée
@@ -236,8 +223,6 @@ while serveur_lance and not fin_de_partie:
 						client.send(b"Au revoir.")	
 						msg = "{} (Joueur {})) declare forfait, et quitte le jeu.".format(joueur.nom, joueur.numero)
 						envoyer_message_a_tous(msg, Joueur.liste)
-						#for joueur_a_contacter in Joueur.liste:
-						#	joueur_a_contacter.envoyer_message(msg)
 						joueur.supprimer()
 					
 					# Si la commande est 'H', on envoie les instructions					
@@ -346,21 +331,14 @@ while serveur_lance and not fin_de_partie:
 										msg = ("\nC'est au tour de {} (Joueur {}).\n".format(Joueur.liste[tour_du_joueur_numero].nom,
 																												Joueur.liste[tour_du_joueur_numero].numero))
 										envoyer_message_a_tous(msg, Joueur.liste)
-										#for joueur_a_contacter in Joueur.liste:
-										#	joueur_a_contacter.envoyer_message("\nC'est au tour de {} (Joueur {}).\n".format(Joueur.liste[tour_du_joueur_numero].nom,
-										#																		Joueur.liste[tour_du_joueur_numero].numero))
 									# Si l'action entraine la victoire du joueur, on en informe les joueurs																			
 									else:
 										fin_de_partie = True	# Et on quitte la boucle
 										msg = "\n{} (Joueur {})) a trouve la sortie et gagne la partie.".format(joueur.nom, joueur.numero)
 										print(msg)
 										envoyer_message_a_tous(msg, Joueur.liste)
-										#for joueur_a_contacter in Joueur.liste:											
-										#	joueur_a_contacter.envoyer_message(msg)
 										msg = "\n\n\n\n\n\nPour rejouer, relancer le programme."	
-										envoyer_message_a_tous(msg, Joueur.liste)
-										#for joueur_a_contacter in Joueur.liste:
-										#	joueur_a_contacter.envoyer_message(msg)											
+										envoyer_message_a_tous(msg, Joueur.liste)										
 	
 	########################   EN DEHORS DES ECHANGES SYNCHRONISES CLIENT / SERVEUR	   #########################################
 	
@@ -429,12 +407,8 @@ while serveur_lance and not fin_de_partie:
 					msg = "\n{} (Joueur {})) a trouve la sortie et gagne la partie.".format(joueur_en_cours.nom, joueur_en_cours.numero)
 					print(msg)
 					envoyer_message_a_tous(msg, Joueur.liste)
-					#for joueur_a_contacter in Joueur.liste:											
-					#	joueur_a_contacter.envoyer_message(msg)
 					msg = "\n\n\n\n\n\nPour rejouer, relancer le programme."			
-					envoyer_message_a_tous(msg, Joueur.liste)
-					#for joueur_a_contacter in Joueur.liste:
-					#	joueur_a_contacter.envoyer_message(msg)			
+					envoyer_message_a_tous(msg, Joueur.liste)		
 
 
 
